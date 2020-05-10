@@ -1,0 +1,3 @@
+rootProject.name='VividDialogProject'
+include ':app'
+include ':vivid-dialog'

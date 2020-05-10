@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".VividStandardDialog"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:id="@+id/layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_height"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="@dimen/default_margin">
+
+        <ImageView
+            android:id="@+id/img_icon"
+            android:layout_width="@dimen/header_icon_size"
+            android:layout_height="@dimen/header_icon_size"
+            android:src="@drawable/ic_check_white_24dp"
+            android:layout_marginEnd="@dimen/header_icon_title_padding"
+            android:layout_marginRight="@dimen/header_icon_title_padding"/>
+
+        <TextView
+            android:id="@+id/text_header_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/header_title_size"
+            android:textStyle="bold"
+            tools:text="DialogTitle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/body_margin"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/body_title_size"
+            android:textStyle="bold"
+            tools:text="This is Title" />
+
+        <TextView
+            android:id="@+id/text_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_margin"
+            tools:text="This is simple message. This is simple message. This is simple message. This is simple message. This is simple message. This is simple message. This is simple message. " />
+
+
+            <com.ornach.richtext.RichEditText
+                android:id="@+id/inputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vertical_margin"
+                tools:hint="Enter Text"
+                app:rt_borderWidth="1dp"
+                app:rt_borderColor="@color/colorPrimary"
+                android:padding="12dp"
+                app:rt_radius="5dp"/>
+        <LinearLayout
+            android:id="@+id/layout_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_footer_margin_top"
+            android:gravity="center">
+
+            <com.ornach.nobobutton.NoboButton
+                android:id="@+id/button_negative"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/button_padding"
+                app:nb_backgroundColor="@android:color/transparent"
+                app:nb_borderColor="@color/colorPrimary"
+                app:nb_borderWidth="@dimen/button_border_width"
+                app:nb_radius="@dimen/button_radius"
+                app:nb_text="Cancel"
+                android:visibility="invisible"/>
+
+            <View
+                android:layout_width="@dimen/horizontal_margin"
+                android:layout_height="1dp" />
+
+            <com.ornach.nobobutton.NoboButton
+                android:id="@+id/button_positive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/button_padding"
+                app:nb_backgroundColor="@color/colorPrimary"
+                app:nb_borderColor="@color/colorPrimary"
+                app:nb_borderWidth="@dimen/button_border_width"
+                app:nb_radius="@dimen/button_radius"
+                app:nb_text="Save"
+                app:nb_textColor="@android:color/white"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

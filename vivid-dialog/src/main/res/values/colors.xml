@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="textColorLight">#DDFFFFFF</color>
+    <color name="textColorDark">#AA000000</color>
+    <color name="textHintColorDark">#44000000</color>
+    <color name="backgroundColorLight">#FFFFFF</color>
+    <color name="backgroundColorDark">#111111</color>
+    <color name="headerBackgroundColorDark">#000000</color>
+
+
+
+    <!--<color name="headerBackgroundColorSuccess">#71C341</color>
+    <color name="backgroundColorSuccess">#3371C341</color>-->
+    <color name="colorSuccess">#71C341</color>
+    <color name="colorWarning">#B61B29</color>
+    <color name="colorInformation">#35A5DB</color>
+    <color name="colorDark">#000000</color>
+
+
+</resources>

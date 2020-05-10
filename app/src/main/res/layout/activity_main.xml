@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <Button
+        android:id="@+id/buttonNormal"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Normal Dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text"
+        android:layout_marginTop="20dp"
+        android:onClick="onClick"/>
+    <Button
+        android:id="@+id/buttonSuccess"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Success Dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text"
+        android:layout_marginTop="20dp"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/buttonWarning"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Warning Dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text"
+        android:layout_marginTop="20dp"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/buttonInfo"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Info Dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text"
+        android:layout_marginTop="20dp"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/buttonDark"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Dark Dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text"
+        android:layout_marginTop="20dp"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/buttonCustom"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Custom Dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text"
+        android:layout_marginTop="20dp"
+        android:onClick="onClick"/>
+
+
+
+
+</LinearLayout>
