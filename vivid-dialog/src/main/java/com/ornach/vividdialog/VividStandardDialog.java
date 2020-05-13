@@ -126,42 +126,55 @@ public class VividStandardDialog extends BaseDialog {
 
     }
 
-    private void updateFooter(){
-        if (TextUtils.isEmpty(builder.negativeButtonText)){
-            negativeButton.setVisibility(View.INVISIBLE);
-        }else {
+    private void updateFooter() {
+
+        layoutFooter.setVisibility(
+                (!TextUtils.isEmpty(builder.negativeButtonText) ||
+                        !TextUtils.isEmpty(builder.positiveButtonText)) ?
+                        View.VISIBLE :
+                        View.GONE
+
+        );
+
+
+        if (!TextUtils.isEmpty(builder.negativeButtonText)) {
+            negativeButton.setVisibility(View.VISIBLE);
             negativeButton.setText(builder.negativeButtonText);
             Utils.updateButtonStyle(negativeButton, builder.negativeButtonStyle);
+        } else {
+            negativeButton.setVisibility(View.INVISIBLE);
         }
 
-        if (TextUtils.isEmpty(builder.positiveButtonText)){
-            positiveButton.setVisibility(View.INVISIBLE);
-        }else {
+        if (!TextUtils.isEmpty(builder.positiveButtonText)) {
+            positiveButton.setVisibility(View.VISIBLE);
             positiveButton.setText(builder.positiveButtonText);
             Utils.updateButtonStyle(positiveButton, builder.positiveButtonStyle);
+        } else {
+            positiveButton.setVisibility(View.INVISIBLE);
         }
 
         // set positive button listener
-        if (builder.positiveButtonClickListener != null) {
-            positiveButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (builder.positiveButtonClickListener != null) {
                     builder.positiveButtonClickListener.onClick(VividStandardDialog.this, BUTTON_POSITIVE);
-                    dismiss();
                 }
-            });
-        }
+                dismiss();
+            }
+        });
+
 
         // set negative button listener
-        if (builder.negativeButtonClickListener != null) {
-            negativeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        negativeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (builder.negativeButtonClickListener != null) {
                     builder.negativeButtonClickListener.onClick(VividStandardDialog.this, BUTTON_NEGATIVE);
-                    dismiss();
                 }
-            });
-        }
+                dismiss();
+            }
+        });
     }
 
     private void updateBuilder() {
@@ -182,10 +195,6 @@ public class VividStandardDialog extends BaseDialog {
             default:
                 updateBuilderForNormal();
                 break;
-        }
-
-        if (TextUtils.isEmpty(builder.headerText)) {
-            builder.headerText = context.getString(R.string.app_name);
         }
 
     }

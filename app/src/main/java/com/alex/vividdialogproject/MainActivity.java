@@ -1,5 +1,6 @@
 package com.alex.vividdialogproject;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.core.content.ContextCompat;
 
 import com.ornach.vividdialog.ButtonStyle;
 import com.ornach.vividdialog.DialogInterface;
+import com.ornach.vividdialog.VividCustomDialog;
 import com.ornach.vividdialog.VividInputDialog;
 import com.ornach.vividdialog.VividStandardDialog;
 
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.text);
 
 
-        VividInputDialog dialog = new VividInputDialog.Builder(this)
+        /*VividInputDialog dialog = new VividInputDialog.Builder(this)
                 .setHeaderText("Customer Name Edit")
                 .setHeaderBackgroundColor(Color.RED)
                 .setMessage("Enter customer name")
@@ -38,28 +40,32 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .build();
 
-        dialog.show();
+        dialog.show();*/
+
+        /*TextView textView1 = new TextView(this){{
+            setText("This is test text");
+            setBackgroundColor(Color.RED);
+        }};
+
+        VividCustomDialog dialog = new VividCustomDialog.Builder(this)
+                .setHeaderText("Test Text")
+                .setView(textView1)
+                .build();
+        dialog.show();*/
     }
 
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.buttonNormal:
-                showDialog(VividStandardDialog.ThemeType.NORMAL);
+                showNormalDialog();
                 break;
-            case R.id.buttonSuccess:
-                showDialog(VividStandardDialog.ThemeType.SUCCESS);
+            case R.id.buttonTheme:
+                startActivity(new Intent(this, StandardDialogActivity.class));
                 break;
-            case R.id.buttonWarning:
-                showDialog(VividStandardDialog.ThemeType.WARNING);
-                break;
-            case R.id.buttonInfo:
-                showDialog(VividStandardDialog.ThemeType.INFORMATION);
-                break;
-            case R.id.buttonDark:
-                showDialog(VividStandardDialog.ThemeType.DARK);
+            case R.id.buttonInput:
+                showInputDialog();
                 break;
             case R.id.buttonCustom:
-
                 customDialog();
                 break;
 
@@ -67,9 +73,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void showDialog(VividStandardDialog.ThemeType themeType){
+    private void showNormalDialog(){
         new VividStandardDialog.Builder(this)
-                .setThemeType(themeType)
                 .setTitle("This is Title")
                 .setMessage("this is simple text message. this is simple text message. ")
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -89,42 +94,48 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void showInputDialog(){
+        VividInputDialog dialog = new VividInputDialog.Builder(this)
+                .setHeaderText("Customer Name Edit")
+                .setHeaderBackgroundColor(Color.BLUE)
+                .setMessage("Enter customer name")
+//                .setIcon(R.drawable.ic_check_white_24dp)
+                .setSubmitButtonListener("Save", new DialogInterface.OnSubmitListener() {
+                    @Override
+                    public void onSubmit(DialogInterface dialog, String text) {
+                        Toast.makeText(MainActivity.this, "text: "+text, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setSubmitButtonListener("Submit", new DialogInterface.OnSubmitListener() {
+                    @Override
+                    public void onSubmit(DialogInterface dialog, String text) {
+                        Toast.makeText(MainActivity.this, "Input Text: "+ text, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .build();
+
+        dialog.show();
+    }
+
     private void customDialog(){
 
-        new VividStandardDialog.Builder(this)
-                .setHeaderBackgroundColor(Color.BLUE)
-                .setHeaderTextColor(Color.YELLOW)
-                .setIcon(R.drawable.ic_close_white_24dp)
-                .setIconColor(Color.RED)
-                .setBackgroundColorRes(R.color.colorAccent)
-                .setTextColor(Color.WHITE)
-                .setTitle("This is Title")
-                .setMessage("this is simple text message. this is simple text message. ")
-                .setNegativeButtonStyle(new ButtonStyle(){{
-                    setBackgroundColor(Color.BLACK);
-                    setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
-                    setBorderColor(Color.YELLOW);
-                }})
-                .setPositiveButtonStyle(
-                        new ButtonStyle()
-                        .setTextColor(Color.BLACK)
-                        .setBackgroundColor(Color.WHITE)
-                        .setBorderColor(Color.GREEN)
-                )
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        VividCustomDialog dialog = new VividCustomDialog.Builder(this)
+                .setView(R.layout.content_custom_dialog)
+                .setHeaderText("Login Validation")
+                .setPositiveButton("Next", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                })
-                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                        View view = ((VividCustomDialog)dialog).getView();
+                        String userName = ((TextView)view.findViewById(R.id.usernameText)).getText().toString();
+                        String password = ((TextView)view.findViewById(R.id.passwordText)).getText().toString();
 
+                        Toast.makeText(MainActivity.this, "Username: "+ userName+"\nPassword: "+ password, Toast.LENGTH_SHORT).show();
                     }
                 })
-                .build()
-                .show();
+                .setNegativeButton("Cancel", null)
+                .build();
+        dialog.show();
 
     }
 

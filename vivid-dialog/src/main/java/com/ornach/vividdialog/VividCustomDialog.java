@@ -4,59 +4,62 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.ornach.nobobutton.NoboButton;
-import com.ornach.richtext.RichEditText;
 
-public class VividInputDialog extends BaseDialog {
-    Builder builder;
+
+public class VividCustomDialog extends BaseDialog {
+
+    private Builder builder;
 
     private View layoutHeader;
     private ImageView imgIcon;
     private TextView textHeader;
 
-    private View layoutBody;
+    private LinearLayout layoutBody;
     private TextView textTitle;
     private TextView textMessage;
-    private RichEditText inputText;
 
     private View layoutFooter;
     private NoboButton positiveButton;
     private NoboButton negativeButton;
 
+    private View mView;
 
-    private VividInputDialog(Builder builder) {
+
+    private VividCustomDialog(Builder builder) {
         super(builder);
         this.builder = builder;
-        setView(R.layout.vivid_input_dialog);
+        setView(R.layout.vivid_custom_dialog);
         createDialog();
+
         initView();
         updateViews();
     }
 
     private void initView() {
-        layoutHeader = getView().findViewById(R.id.layout_header);
-        imgIcon = getView().findViewById(R.id.img_icon);
-        textHeader = getView().findViewById(R.id.text_header_text);
+        layoutHeader = super.getView().findViewById(R.id.layout_header);
+        imgIcon = super.getView().findViewById(R.id.img_icon);
+        textHeader = super.getView().findViewById(R.id.text_header_text);
 
-        layoutBody = getView().findViewById(R.id.layout_body);
-        textTitle = getView().findViewById(R.id.text_title);
-        textMessage = getView().findViewById(R.id.text_message);
-        inputText = getView().findViewById(R.id.inputEditText);
+        layoutBody = super.getView().findViewById(R.id.layout_body);
 
-        layoutFooter = getView().findViewById(R.id.layout_footer);
-        positiveButton = getView().findViewById(R.id.button_positive);
-        negativeButton = getView().findViewById(R.id.button_negative);
+        layoutFooter = super.getView().findViewById(R.id.layout_footer);
+        positiveButton = super.getView().findViewById(R.id.button_positive);
+        negativeButton = super.getView().findViewById(R.id.button_negative);
     }
 
     private void updateViews() {
@@ -64,7 +67,6 @@ public class VividInputDialog extends BaseDialog {
         updateHeader();
         updateBody();
         updateFooter();
-
 
     }
 
@@ -100,53 +102,21 @@ public class VividInputDialog extends BaseDialog {
 
     private void updateBody() {
 
-        if (builder.backgroundColor!=null){
+        if (builder.backgroundColor != null) {
             layoutBody.setBackgroundColor(builder.backgroundColor);
         }
 
-        // body title
-        if (TextUtils.isEmpty(builder.title)) {
-            textTitle.setVisibility(View.GONE);
+        if (builder.view != null) {
+            this.mView = builder.view;
+
+        } else if (builder.layoutId != null) {
+            this.mView = LayoutInflater.from(builder.getContext()).inflate(builder.layoutId, null, false);
         } else {
-            textTitle.setText(builder.title);
-            textTitle.setTextColor(builder.textColor);
+            throw new IllegalArgumentException("View must not be null.");
         }
 
-        // body message
-        if (TextUtils.isEmpty(builder.message)) {
-            textMessage.setVisibility(View.GONE);
-        } else {
-            textMessage.setText(builder.message);
-            textMessage.setTextColor(builder.textColor);
-        }
+        layoutBody.addView(this.mView);
 
-
-        if (!TextUtils.isEmpty(builder.inputText)) {
-            inputText.setText(builder.inputText);
-        }
-
-        if (!TextUtils.isEmpty(builder.hintText)) {
-            inputText.setHint(builder.hintText);
-        }
-
-        // input style
-        if (builder.inputStyle != null) {
-            if (builder.inputStyle.backgroundColor != null)
-                inputText.setBackgroundColor(builder.inputStyle.backgroundColor);
-            if (builder.inputStyle.borderColor != null)
-                inputText.setBorderColor(builder.inputStyle.borderColor);
-            if (builder.inputStyle.borderWidth != null)
-                inputText.setBorderWidth(builder.inputStyle.borderWidth);
-            if (builder.inputStyle.borderWidth != null)
-                inputText.setBorderWidth(builder.inputStyle.borderWidth);
-            if (builder.inputStyle.textColor != null)
-                inputText.setTextColor(builder.inputStyle.textColor);
-            if (builder.inputStyle.textSize != null)
-                inputText.setTextSize(builder.inputStyle.textSize);
-            if (builder.inputStyle.hintColor != null)
-                inputText.setHintTextColor(builder.inputStyle.hintColor);
-            if (builder.inputStyle.radius != null) inputText.setRadius(builder.inputStyle.radius);
-        }
     }
 
     private void updateFooter() {
@@ -180,8 +150,8 @@ public class VividInputDialog extends BaseDialog {
         positiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (builder.submitButtonListener != null) {
-                    builder.submitButtonListener.onSubmit(VividInputDialog.this, inputText.getText().toString());
+                if (builder.positiveButtonClickListener != null) {
+                    builder.positiveButtonClickListener.onClick(VividCustomDialog.this, BUTTON_POSITIVE);
                 }
                 dismiss();
             }
@@ -193,7 +163,7 @@ public class VividInputDialog extends BaseDialog {
             @Override
             public void onClick(View v) {
                 if (builder.negativeButtonClickListener != null) {
-                    builder.negativeButtonClickListener.onClick(VividInputDialog.this, BUTTON_NEGATIVE);
+                    builder.negativeButtonClickListener.onClick(VividCustomDialog.this, BUTTON_NEGATIVE);
                 }
                 dismiss();
             }
@@ -205,16 +175,15 @@ public class VividInputDialog extends BaseDialog {
         super.show();
     }
 
-    public View getInputView(){
-        return this.inputText;
+    public View getView() {
+        return this.mView;
     }
-
 
 
     public static class Builder extends BaseBuilder<Builder> {
 
 
-        protected boolean isHeaderEnabled = true;
+        protected Boolean isHeaderEnabled = true;
         protected @ColorInt
         Integer headerBackgroundColor;
         protected @ColorInt
@@ -223,28 +192,23 @@ public class VividInputDialog extends BaseDialog {
         Integer headerTextColor;
         protected @ColorInt
         Integer iconColor;
-        protected @ColorInt
-        Integer textColor;
 
         protected String headerText;
         protected @DrawableRes
         Integer icon;
 
-        protected String title;
-        protected String message;
+        protected String positiveButtonText;
+        protected String negativeButtonText;
+
+        protected OnClickListener positiveButtonClickListener;
+        protected OnClickListener negativeButtonClickListener;
 
         protected ButtonStyle negativeButtonStyle;
         protected ButtonStyle positiveButtonStyle;
 
-        protected String positiveButtonText;
-        protected String negativeButtonText;
-
-        protected OnSubmitListener submitButtonListener;
-        protected OnClickListener negativeButtonClickListener;
-
-        protected String hintText;
-        protected String inputText;
-        protected InputStyle inputStyle;
+        protected View view;
+        protected @LayoutRes
+        Integer layoutId;
 
         public Builder(Context context) {
             super(context);
@@ -262,16 +226,6 @@ public class VividInputDialog extends BaseDialog {
             this.headerTextColor = Color.WHITE;
             this.iconColor = Color.WHITE;
 
-
-            this.title = "";
-            this.message = "";
-            this.textColor = Utils.getColorRes(context, R.color.textColorDark);
-
-            this.inputStyle = new InputStyle()
-                    .setBackgroundColor(Color.TRANSPARENT)
-                    .setBorderColor(Utils.getColorRes(context, R.color.colorPrimary))
-                    .setBorderWidth(1);
-
             this.negativeButtonStyle = new ButtonStyle()
                     .setBackgroundColor(Color.TRANSPARENT)
                     .setBorderColor(Utils.getColorRes(context, R.color.colorPrimary))
@@ -284,8 +238,13 @@ public class VividInputDialog extends BaseDialog {
 
         }
 
-        public VividInputDialog build() {
-            return new VividInputDialog(this);
+        public VividCustomDialog build() {
+
+            if (view == null && layoutId == null) {
+                throw new IllegalArgumentException("View must not be null.");
+            }
+
+            return new VividCustomDialog(this);
         }
 
         public Builder setHeaderEnabled(boolean headerEnabled) {
@@ -343,35 +302,15 @@ public class VividInputDialog extends BaseDialog {
             return this;
         }
 
-        public Builder setTextColor(@ColorInt int color) {
-            this.textColor = color;
-            return this;
-        }
-
-        public Builder setTextColorRes(@ColorRes int color) {
-            this.textColor = ContextCompat.getColor(getContext(), color);
-            return this;
-        }
-
-        public Builder setSubmitButtonListener(String text, @Nullable OnSubmitListener listener) {
+        public Builder setPositiveButton(String text, @Nullable OnClickListener listener) {
             this.positiveButtonText = text;
-            this.submitButtonListener = listener;
+            this.positiveButtonClickListener = listener;
             return this;
         }
 
         public Builder setNegativeButton(String text, @Nullable OnClickListener listener) {
             this.negativeButtonText = text;
             this.negativeButtonClickListener = listener;
-            return this;
-        }
-
-        public Builder setTitle(String title) {
-            this.title = title;
-            return this;
-        }
-
-        public Builder setMessage(String message) {
-            this.message = message;
             return this;
         }
 
@@ -385,78 +324,14 @@ public class VividInputDialog extends BaseDialog {
             return this;
         }
 
-        public Builder setInputStyle(InputStyle inputStyle) {
-            this.inputStyle = inputStyle;
+        public Builder setView(View view) {
+            this.view = view;
             return this;
         }
 
-        public Builder setInputBackgroundColor(@ColorInt int color) {
-            if (this.inputStyle == null) {
-                this.inputStyle = new InputStyle();
-            }
-
-            this.inputStyle.setBackgroundColor(color);
+        public Builder setView(@LayoutRes int layoutId) {
+            this.layoutId = layoutId;
             return this;
         }
-
-        public Builder setInputBorderColor(@ColorInt int color) {
-            if (this.inputStyle == null) {
-                this.inputStyle = new InputStyle();
-            }
-            this.inputStyle.setBorderColor(color);
-            return this;
-        }
-
-        public Builder setInputBorderWidth(int size) {
-            if (this.inputStyle == null) {
-                this.inputStyle = new InputStyle();
-            }
-            this.inputStyle.setBorderWidth(size);
-            return this;
-        }
-
-        public Builder setInputRadius(int radius) {
-            if (this.inputStyle == null) {
-                this.inputStyle = new InputStyle();
-            }
-            this.inputStyle.setRadius(radius);
-            return this;
-        }
-
-        public Builder setInputTextSize(int textSize) {
-            if (this.inputStyle == null) {
-                this.inputStyle = new InputStyle();
-            }
-            this.inputStyle.setTextSize(textSize);
-            return this;
-        }
-
-        public Builder setInputTextColor(@ColorInt int color) {
-            if (this.inputStyle == null) {
-                this.inputStyle = new InputStyle();
-            }
-            this.inputStyle.setTextColor(color);
-            return this;
-        }
-
-        public Builder setInputHintColor(@ColorInt int color) {
-            if (this.inputStyle == null) {
-                this.inputStyle = new InputStyle();
-            }
-            this.inputStyle.setHintColor(color);
-            return this;
-        }
-
-        public Builder setInputText(String text) {
-            this.inputText = text;
-            return this;
-        }
-
-        public Builder setInputHintText(String text) {
-            this.hintText = text;
-            return this;
-        }
-
-
     }
 }

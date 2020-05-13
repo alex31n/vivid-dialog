@@ -76,8 +76,7 @@
                 app:nb_borderColor="@color/colorPrimary"
                 app:nb_borderWidth="@dimen/button_border_width"
                 app:nb_radius="@dimen/button_radius"
-                app:nb_text="Cancel"
-                android:visibility="invisible"/>
+                app:nb_text="Cancel" />
 
             <View
                 android:layout_width="@dimen/horizontal_margin"

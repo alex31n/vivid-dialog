@@ -53,7 +53,6 @@ public class BaseDialog implements DialogInterface {
 
     protected AlertDialog createDialog(){
 
-
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
 
         // set view if java view found
