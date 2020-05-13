@@ -153,7 +153,8 @@ public class VividCustomDialog extends BaseDialog {
                 if (builder.positiveButtonClickListener != null) {
                     builder.positiveButtonClickListener.onClick(VividCustomDialog.this, BUTTON_POSITIVE);
                 }
-                dismiss();
+
+                autoDismiss();
             }
         });
 
@@ -165,7 +166,7 @@ public class VividCustomDialog extends BaseDialog {
                 if (builder.negativeButtonClickListener != null) {
                     builder.negativeButtonClickListener.onClick(VividCustomDialog.this, BUTTON_NEGATIVE);
                 }
-                dismiss();
+                autoDismiss();
             }
         });
     }

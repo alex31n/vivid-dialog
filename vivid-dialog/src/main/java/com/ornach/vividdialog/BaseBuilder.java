@@ -14,6 +14,7 @@ public class BaseBuilder<T extends BaseBuilder> {
     T childBuilder;
 
     protected boolean isCancelable =true;
+    protected boolean isAutoDismissible=true;
 
     protected DialogInterface.OnCancelListener onCancelListener;
     protected DialogInterface.OnDismissListener onDismissListener;
@@ -36,6 +37,13 @@ public class BaseBuilder<T extends BaseBuilder> {
         isCancelable = cancelable;
         return childBuilder;
     }
+
+    public T setAutoDismissible(boolean dismissible) {
+        isAutoDismissible = dismissible;
+        return childBuilder;
+    }
+
+
 
     public T setOnCancelListener(DialogInterface.OnCancelListener onCancelListener) {
         this.onCancelListener = onCancelListener;

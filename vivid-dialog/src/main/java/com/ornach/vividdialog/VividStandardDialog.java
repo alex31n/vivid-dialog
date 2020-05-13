@@ -160,7 +160,7 @@ public class VividStandardDialog extends BaseDialog {
                 if (builder.positiveButtonClickListener != null) {
                     builder.positiveButtonClickListener.onClick(VividStandardDialog.this, BUTTON_POSITIVE);
                 }
-                dismiss();
+                autoDismiss();
             }
         });
 
@@ -172,7 +172,7 @@ public class VividStandardDialog extends BaseDialog {
                 if (builder.negativeButtonClickListener != null) {
                     builder.negativeButtonClickListener.onClick(VividStandardDialog.this, BUTTON_NEGATIVE);
                 }
-                dismiss();
+                autoDismiss();
             }
         });
     }

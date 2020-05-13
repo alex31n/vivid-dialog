@@ -77,10 +77,11 @@ public class MainActivity extends AppCompatActivity {
         new VividStandardDialog.Builder(this)
                 .setTitle("This is Title")
                 .setMessage("this is simple text message. this is simple text message. ")
+                .setAutoDismissible(false)
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        dialog.dismiss();
                     }
                 })
                 .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {

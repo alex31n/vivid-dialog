@@ -20,14 +20,13 @@ public class BaseDialog implements DialogInterface {
 
     private View mView;
     private AlertDialog mDialog;
-    private int mViewLayoutResId=0;
+    private int mViewLayoutResId = 0;
 
     public BaseDialog(BaseBuilder builder) {
-        this.context =builder.getContext();
-        this.builder =builder;
+        this.context = builder.getContext();
+        this.builder = builder;
 
     }
-
 
 
     public View getView() {
@@ -39,7 +38,7 @@ public class BaseDialog implements DialogInterface {
      */
     protected void setView(int layoutResId) {
         this.mView = LayoutInflater.from(context).inflate(layoutResId, null, false);
-        this.mViewLayoutResId= layoutResId;
+        this.mViewLayoutResId = layoutResId;
     }
 
     /**
@@ -51,15 +50,15 @@ public class BaseDialog implements DialogInterface {
     }
 
 
-    protected AlertDialog createDialog(){
+    protected AlertDialog createDialog() {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
 
         // set view if java view found
         // and otherwise if resource view found then add resource layout
-        if (mView !=null){
+        if (mView != null) {
             dialogBuilder.setView(mView);
-        }else if (mViewLayoutResId!=0){
+        } else if (mViewLayoutResId != 0) {
             dialogBuilder.setView(mViewLayoutResId);
         }
 
@@ -67,7 +66,7 @@ public class BaseDialog implements DialogInterface {
         dialogBuilder.setCancelable(builder.isCancelable);
 
         // set dismiss listener
-        if (builder.onDismissListener!=null) {
+        if (builder.onDismissListener != null) {
             dialogBuilder.setOnDismissListener(new android.content.DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(android.content.DialogInterface dialog) {
@@ -77,7 +76,7 @@ public class BaseDialog implements DialogInterface {
         }
 
         // set cancel listener
-        if (builder.onCancelListener!=null){
+        if (builder.onCancelListener != null) {
             dialogBuilder.setOnCancelListener(new android.content.DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(android.content.DialogInterface dialog) {
@@ -91,7 +90,7 @@ public class BaseDialog implements DialogInterface {
 
 
         // set show listener
-        if (builder.onShowListener!=null) {
+        if (builder.onShowListener != null) {
             mDialog.setOnShowListener(new android.content.DialogInterface.OnShowListener() {
                 @Override
                 public void onShow(android.content.DialogInterface dialog) {
@@ -122,6 +121,13 @@ public class BaseDialog implements DialogInterface {
         }
 
         mDialog.dismiss();
+
+    }
+
+    protected void autoDismiss() {
+        if (builder.isAutoDismissible) {
+            this.dismiss();
+        }
     }
 
     @Override

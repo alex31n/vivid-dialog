@@ -183,7 +183,7 @@ public class VividInputDialog extends BaseDialog {
                 if (builder.submitButtonListener != null) {
                     builder.submitButtonListener.onSubmit(VividInputDialog.this, inputText.getText().toString());
                 }
-                dismiss();
+                autoDismiss();
             }
         });
 
@@ -195,7 +195,7 @@ public class VividInputDialog extends BaseDialog {
                 if (builder.negativeButtonClickListener != null) {
                     builder.negativeButtonClickListener.onClick(VividInputDialog.this, BUTTON_NEGATIVE);
                 }
-                dismiss();
+                autoDismiss();
             }
         });
     }
