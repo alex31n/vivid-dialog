@@ -3,10 +3,25 @@
 # Vivid Dialog
 A beautiful and advanced material dialog library for android
 
-## Gradle
+&nbsp;
+### Install
+&nbsp;
+Step 1. Add the JitPack repository to your build file  
+Add it in your root build.gradle at the end of repositories:
+```gradle
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
 ```
+
+Step 2. Add the dependency
+```gradle
 dependencies {
-    implementation 'com.ornach.vividdialog:vivid-dialog:<latest_version>'
+    implementation 'com.github.alex31n:vivid-dialog:2.0.1'
 }
 ```
 
@@ -86,42 +101,42 @@ dependencies {
 ```
 
 ## Attributes
-|        Attribute                      |         Default Value        |        Definations          |
-| ------------------------------------- | ---------------------------- | --------------------------- |
-| setThemeType(ThemeType themeType)  | ThemeType.NORMAL | Style of dialog box |
-| setBackgroundColor(@ColorInt int color) | Color.WHITE |  The background color. set from color int|
-| setBackgroundColorRes(@ColorRes int colorRes) | | The background color. set from color resource| 
-| setHeaderEnabled(boolean headerEnabled) | true | Show/hide header of the Dialog|
-| setHeaderText(String headerText) | | The text fo the header |
-| setHeaderTextColor(@ColorInt int color)  |  Color.WHITE | Color of header text. set from color int |
-| setHeaderTextColorRes(@ColorRes int colorRes) | | Color of header text. set from color resouce |
-| setHeaderBackgroundColor(@ColorInt int color) | | The bcakground color of header, set from color int |
-| setHeaderBackgroundColorRes(@ColorRes int colorRes) | R.color.colorPrimary | The bcakground color of header, set from color resource  | 
-| setIcon(int icon) | | The icon of dialog, set from drawable resource|
-| setIconColor(@ColorInt int iconColor) |  Color.WHITE | The color of icon. |
-| setIconColorRes(@ColorRes int iconColorRes) | | The color of icon. |
-| setTitle(String title) | | The text of message title |
-| setMessage(String message) | | The text of dialog message |
-| setInputText(String text) | | The text of Input filed (It only working for VividInputDialog) |
-| setInputTextColor(@ColorInt int color) | The color of Input filed text color |
-| setInputTextSize(int textSize) | | The size of input text |
-| setInputHintText(String text) | | The text of input hint |
-| setInputHintColor(@ColorInt int color) | | The color of input hint text |
-| setInputRadius(int radius) | | The radius of input box |
-| setInputBackgroundColor(@ColorInt int color) | | The background color of input box |
-| setInputBorderColor(@ColorInt int color) | | The border color of input box |
-| setInputBorderWidth(int size) | | The border size of input box |
-| setInputStyle(InputStyle inputStyle) | | The custom input box style |
-| setNegativeButton(String text, @Nullable OnClickListener listener) | | Button text & The listener of Negetive button | 
-| setNegativeButtonStyle(ButtonStyle negativeButtonStyle) | Default \| ButtonStyle | The style of Negetive button |
-| setPositiveButton(String text, @Nullable OnClickListener listener) | | Button text & The listener of Positive button | 
-| setPositiveButtonStyle(ButtonStyle positiveButtonStyle) | Default \| ButtonStyle | The style of Positive button
-| setView(View view) | | The custom view of the dialog |
-| setView(int layoutResId) | | The custom view of the dialog. Set from layout resource |
-| setAutoDismissible(boolean dismissible) | true | Auto dismiss dialog when user click a button |
-| setCancelable(boolean cancelable) | true | Auto cancel dialog when user click outside of the dialog |
-| setOnDismissListener(OnDismissListener onDismissListener) | | Call the listener when dialog dismiss |
-| setOnShowListener(OnShowListener onShowListener) | | Call the listener when dialog show |
+| Attribute                                                          | Default Value                       | Definations                                                    |
+|--------------------------------------------------------------------|-------------------------------------|----------------------------------------------------------------|
+| setThemeType(ThemeType themeType)                                  | ThemeType.NORMAL                    | Style of dialog box                                            |
+| setBackgroundColor(@ColorInt int color)                            | Color.WHITE                         | The background color. set from color int                       |
+| setBackgroundColorRes(@ColorRes int colorRes)                      |                                     | The background color. set from color resource                  | 
+| setHeaderEnabled(boolean headerEnabled)                            | true                                | Show/hide header of the Dialog                                 |
+| setHeaderText(String headerText)                                   |                                     | The text fo the header                                         |
+| setHeaderTextColor(@ColorInt int color)                            | Color.WHITE                         | Color of header text. set from color int                       |
+| setHeaderTextColorRes(@ColorRes int colorRes)                      |                                     | Color of header text. set from color resouce                   |
+| setHeaderBackgroundColor(@ColorInt int color)                      |                                     | The bcakground color of header, set from color int             |
+| setHeaderBackgroundColorRes(@ColorRes int colorRes)                | R.color.colorPrimary                | The bcakground color of header, set from color resource        | 
+| setIcon(int icon)                                                  |                                     | The icon of dialog, set from drawable resource                 |
+| setIconColor(@ColorInt int iconColor)                              | Color.WHITE                         | The color of icon.                                             |
+| setIconColorRes(@ColorRes int iconColorRes)                        |                                     | The color of icon.                                             |
+| setTitle(String title)                                             |                                     | The text of message title                                      |
+| setMessage(String message)                                         |                                     | The text of dialog message                                     |
+| setInputText(String text)                                          |                                     | The text of Input filed (It only working for VividInputDialog) |
+| setInputTextColor(@ColorInt int color)                             | The color of Input filed text color |                                                                |
+| setInputTextSize(int textSize)                                     |                                     | The size of input text                                         |
+| setInputHintText(String text)                                      |                                     | The text of input hint                                         |
+| setInputHintColor(@ColorInt int color)                             |                                     | The color of input hint text                                   |
+| setInputRadius(int radius)                                         |                                     | The radius of input box                                        |
+| setInputBackgroundColor(@ColorInt int color)                       |                                     | The background color of input box                              |
+| setInputBorderColor(@ColorInt int color)                           |                                     | The border color of input box                                  |
+| setInputBorderWidth(int size)                                      |                                     | The border size of input box                                   |
+| setInputStyle(InputStyle inputStyle)                               |                                     | The custom input box style                                     |
+| setNegativeButton(String text, @Nullable OnClickListener listener) |                                     | Button text & The listener of Negetive button                  | 
+| setNegativeButtonStyle(ButtonStyle negativeButtonStyle)            | Default \| ButtonStyle              | The style of Negetive button                                   |
+| setPositiveButton(String text, @Nullable OnClickListener listener) |                                     | Button text & The listener of Positive button                  | 
+| setPositiveButtonStyle(ButtonStyle positiveButtonStyle)            | Default \| ButtonStyle              | The style of Positive button                                   |
+| setView(View view)                                                 |                                     | The custom view of the dialog                                  |
+| setView(int layoutResId)                                           |                                     | The custom view of the dialog. Set from layout resource        |
+| setAutoDismissible(boolean dismissible)                            | true                                | Auto dismiss dialog when user click a button                   |
+| setCancelable(boolean cancelable)                                  | true                                | Auto cancel dialog when user click outside of the dialog       |
+| setOnDismissListener(OnDismissListener onDismissListener)          |                                     | Call the listener when dialog dismiss                          |
+| setOnShowListener(OnShowListener onShowListener)                   |                                     | Call the listener when dialog show                             |
 
 
 ## Used Library in this project

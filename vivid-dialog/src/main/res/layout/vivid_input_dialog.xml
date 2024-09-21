@@ -59,7 +59,7 @@
             tools:text="This is simple message. This is simple message. This is simple message. This is simple message. This is simple message. This is simple message. This is simple message. " />
 
 
-            <com.ornach.richtext.RichEditText
+            <com.github.alex31n.richtext.RichEditText
                 android:id="@+id/inputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
             android:layout_marginTop="@dimen/layout_footer_margin_top"
             android:gravity="center">
 
-            <com.ornach.nobobutton.NoboButton
+            <com.github.nobobutton.NoboButton
                 android:id="@+id/button_negative"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                 android:layout_width="@dimen/horizontal_margin"
                 android:layout_height="1dp" />
 
-            <com.ornach.nobobutton.NoboButton
+            <com.github.nobobutton.NoboButton
                 android:id="@+id/button_positive"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
