@@ -21,7 +21,7 @@ dependencyResolutionManagement {
 Step 2. Add the dependency
 ```gradle
 dependencies {
-    implementation 'com.github.alex31n:vivid-dialog:2.0.1'
+    implementation 'com.github.alex31n:vivid-dialog:2.0.2'
 }
 ```
 
