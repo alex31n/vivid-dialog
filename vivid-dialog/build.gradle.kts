@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.github.alex31n.vivid_dialog"
+    namespace = "com.github.alex31n.vividdialog"
     compileSdk = 34
 
     defaultConfig {

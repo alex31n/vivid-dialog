@@ -1,4 +1,4 @@
-package com.github.alex31n.vivid_dialog;
+package com.github.alex31n.vividdialog;
 
 import android.content.Context;
 import android.util.Log;
